@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="text-danger" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    
+    <form action="/clubs/create" method="POST">
+        {%csrf_token%}
+        <div id="form">
+            <p>Name: <input type="text" name="name"></p>
+            <p>Description: <input type="text" name="desc"></p>
+            <p>Star From: <input type="date" name="date_start" >
+            <p>End To:<input type="date" name="date_end"></p>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+    <a  href="/">Cancel</a>
+    {% endblock content %}

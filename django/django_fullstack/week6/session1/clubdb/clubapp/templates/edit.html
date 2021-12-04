@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div >
+        <h1 > Hello {{user.first_name}} {{user.last_name}}! Let's edit your Club!</h1>
+    </div>
+
+    <form action="/clubs/{{club.id}}/update" method="POST">
+        {%csrf_token%}
+        <div id="form">
+            <p>Name: <input type="text" name="name" value="{{club.name}}"></p>
+            <p>Desc: <input type="text" name="desc" value="{{club.desc}}"></p>
+            <p>Start Date: <input type="date" name="date_start" value="{{club.date_start|date:'Y-m-d'}}"></p>
+            <p>End Date: <input type="date" name="date_end" value="{{club.date_end|date:'Y-m-d'}}"></p>
+            <button type="submit" >Update</button> <br> <br>
+        </div>
+    </form>
+    <a href="/clubs"> <button >Cancel</button></a>
+{% endblock content %}

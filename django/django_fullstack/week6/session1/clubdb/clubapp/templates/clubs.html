@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Most Popular club : </h1>
+<h3> Your clubs :</h3>
+<table class="table table-dark">
+    <thead>
+        <th>Name</th>
+        <th>Members</th>
+        <th>Owner</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Desc</th>
+        <th>Action</th>
+    </thead>
+    {% for club in user_clubs%}
+    <tr>
+        <td><a href="/clubs/{{club.id}}">{{club.name}}</a></td>
+        <td>{{club.joined.count}}</td>
+        <td>{{club.owner.first_name}}</td>
+        <td>{{club.date_start}}</td>
+        <td>{{club.date_end}}</td>
+        <td>{{club.desc}}</td>
+        <td><a href="clubs/{{club.id}}/delete"> Remove </a> |
+            <a href="clubs/edit/{{club.id}}">Edit</a> |
+        </td>
+    </tr>
+    {% endfor %}
+
+    <!-- User is member of  -->
+    {% for club in member_clubs%}
+    <tr>
+        <td><a href="/clubs/{{club.id}}">{{club.name}}</a></td>
+        <td>{{club.joined.count}}</td>
+        <td>{{club.owner.first_name}}</td>
+        <td>{{club.date_start}}</td>
+        <td>{{club.date_end}}</td>
+        <td>{{club.desc}}</td>
+        <td><a href="/clubs/{{club.id}}/cancel">Drop</a></td>
+    </tr>
+    {% endfor %}
+
+</table> <br><br>
+<a href="/clubs/new"><button class="btn btn-primary">Create a new club </button></a>
+<br><br>
+<h3> Others people clubs :</h3>
+<table class="table">
+    <thead>
+        <th>Owner</th>
+        <th>Club</th>
+        <th> Start Date</th>
+        <th> End Date</th>
+        <th>desc</th>
+        <th>join</th>
+    </thead>
+   {% for club in other_clubs %}
+    <tr>
+        <td>{{club.owner.first_name}}</td>
+        <td><a href="/clubs/{{ club.id }}">{{club.name}}</a></td>
+        <td>{{club.date_start}}</td>
+        <td>{{club.date_end}}</td>
+        <td>{{club.desc}}</td>
+        <td><a href="/clubs/{{club.id}}/join">Join</a></td>
+    {% endfor %}
+</table>
+
+{% endblock content %}

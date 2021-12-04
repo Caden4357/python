@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{club.name}}</h1>
+    <ul>
+        <li>Description: {{ club.desc }}</li>
+        <li>Club start date: {{ club.date_start }}</li>
+        <li>Club end date: {{ club.date_end }}</li> 
+        <li>Last Updated: {{club.updated_at}}</li>
+        <li>Created on: {{ club.created_at }}</li>
+    </ul>
+    <h2>Other users joining the club:</h2>
+            <ul>
+                {% for member in club.joined.all %}
+                    <li>{{ member.first_name }}</li>
+                {% endfor %}
+            </ul>
+{% endblock content %}
