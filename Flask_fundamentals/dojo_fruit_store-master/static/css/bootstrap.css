@@ -499,7 +499,13 @@ mark,
   margin-bottom: 0.5rem;
   line-height: 1;
 }
+img{
+  width: 10rem;
+  height: 10rem;
+  border-radius: 80px;
+  margin: 3.2rem;
 
+}
 .figure-caption {
   font-size: 90%;
   color: #6c757d;
