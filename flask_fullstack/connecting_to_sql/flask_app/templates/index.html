@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Clinic</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='java_script.js') }}"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome To The Caden's Pet Clinic</h1>
+        <a href="/new/owner">New Owner</a>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            {%for owner in owners%}
+            <tr>
+                <td><a href="/single/owner/{{owner.id}}">{{owner.first_name}}</a></td>
+                <td>{{owner.last_name}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        <!-- <input id="selected" type="text" list="suggestions" placeholder="Search">
+
+        <datalist id="suggestions">
+            {%for owner in owners%}
+            <option hidden data-value="{{owner.id}}">{{owner.full_name()}}</option>
+                {%endfor%}
+        </datalist> -->
+
+    </div>
+</body>
+</html>
