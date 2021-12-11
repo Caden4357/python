@@ -40,8 +40,14 @@ class Owner:
     @classmethod
     def create_owner(cls, data):
         query = "INSERT INTO owners (first_name, last_name) VALUES (%(first_name)s, %(last_name)s)"
-
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(f"Results: {results}")
-
         return results
+
+    @classmethod
+    def update_owner(cls, data):
+        return 
+    
+    @classmethod
+    def delete_owner(cls, data):
+        return 

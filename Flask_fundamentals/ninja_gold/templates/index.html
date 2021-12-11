@@ -54,7 +54,13 @@
             </div>
         </div>
         <p class="mt-5">Activities: </p>
-        <p>{{session['message']|safe}}</p>
+        {%for message in session['messages']%}
+            {%if session['amount'] < 0%}
+            <p style="background-color: red;">{{message}}</p>
+            {%else%}
+            <p style="background-color: blue;">{{message}}</p>
+            {%endif%}
+        {%endfor%}
     </div>
 </body>
 </html>

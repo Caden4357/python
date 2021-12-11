@@ -13,12 +13,14 @@ def index():
 
 @app.route('/single/owner/<int:id>')
 def get_one_owner(id):
+    print(id)
     data = {
         "id": id
     }
+    print(data)
     this_owner = owner.Owner.get_one_owner_by_id(data)
-    this_ownerJSONdata = jsonpickle.encode(this_owner, indent=4)
-    session['this_owner'] = this_ownerJSONdata
+    # this_ownerJSONdata = jsonpickle.encode(this_owner, indent=4)
+    # session['this_owner'] = this_ownerJSONdata
     return render_template('one_owner.html', this_owner=this_owner)
 
 @app.route('/new/owner')
