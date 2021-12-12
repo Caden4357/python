@@ -30,12 +30,14 @@
                     <tr>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 {%for owner in owners%}
                 <tr>
                     <td><a class="btn" href="/single/owner/{{owner.id}}">{{owner.first_name}}</a></td>
                     <td>{{owner.last_name}}</td>
+                    <td><a href="/delete/owner/{{owner.id}}">Delete</a></td>
                 </tr>
                 {%endfor%}
             </table>

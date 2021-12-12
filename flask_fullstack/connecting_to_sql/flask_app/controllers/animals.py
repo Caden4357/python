@@ -22,3 +22,29 @@ def create_animal():
     print(new_animal)
 
     return redirect('/animals')
+
+@app.route('/single/animal/<int:id>')
+def get_one_animal(id):
+    print(id)
+    owners = owner.Owner.get_all()
+    data = {
+        "id": id
+    }
+    print(data)
+    this_animal = animal.Animal.get_one_animal(data)
+    print(this_animal)
+    return render_template('one_animal.html', this_animal=this_animal, owners=owners)
+
+@app.route('/update/animal/<int:id>', methods=['POST'])
+def get_one(id):
+    print(id)
+    data = {
+        'id': id,
+        'name': request.form['name'],
+        'age': request.form['age'],
+        'type': request.form['type'],
+        'owner_id':request.form['owner_id']
+    }
+    print(data)
+    animal.Animal.update_animal(data)
+    return redirect('/animals')

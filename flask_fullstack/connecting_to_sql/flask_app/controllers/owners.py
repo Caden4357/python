@@ -43,3 +43,11 @@ def update_owner(id):
     owner.Owner.update_owner(data)
     return redirect('/')
 
+@app.route('/delete/owner/<int:id>')
+def delete_owner(id):
+    data = {
+        "id": id
+    }
+    owner.Owner.delete_owner(data)
+    return redirect('/')
+

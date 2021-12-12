@@ -11,7 +11,7 @@ class Animal:
         self.type = data['type']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.owner = None
+        self.owner = owner.Owner.get_one_owner_by_id({'id':data['owner_id']})
     @classmethod
     def get_all_animals(cls):
         query = "SELECT * FROM animals JOIN owners ON owners.id = owner_id"
@@ -39,3 +39,14 @@ class Animal:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(results)
         return results
+    @classmethod
+    def get_one_animal(cls, data):
+        query = "SELECT * FROM animals WHERE id = %(id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        this_animal = cls(results[0])
+        return this_animal
+    
+    @classmethod
+    def update_animal(cls, data):
+        query = "UPDATE animals SET name = %(name)s, age= %(age)s, type= %(type)s, owner_id=%(owner_id)s WHERE id = %(id)s "
+        return connectToMySQL(cls.db_name).query_db(query, data)
