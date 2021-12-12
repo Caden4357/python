@@ -19,6 +19,7 @@ def get_one_owner(id):
     }
     print(data)
     this_owner = owner.Owner.get_one_owner_by_id(data)
+    print(this_owner)
     # this_ownerJSONdata = jsonpickle.encode(this_owner, indent=4)
     # session['this_owner'] = this_ownerJSONdata
     return render_template('one_owner.html', this_owner=this_owner)
@@ -31,3 +32,14 @@ def new_owner():
 def create_owner():
     owner_id = owner.Owner.create_owner(request.form)
     return redirect('/')
+
+@app.route('/update/user/<int:id>', methods=['POST'])
+def update_owner(id):
+    data = {
+        'id': id,
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+    }
+    owner.Owner.update_owner(data)
+    return redirect('/')
+

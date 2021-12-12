@@ -14,17 +14,24 @@
             <div class="d-flex justify-content-between pt-5">
                 <a class="btn btn-secondary text-center" href="/animals" class="mt-4">Check out our animals</a>
                 <h1>Welcome To Caden's Pet Clinic</h1>
-                <a class="btn btn-secondary text-center" href="/new/animal" class="mt-4">New Animal? Click Here</a>
+                <a class="btn btn-secondary text-center" href="/new/owner" class="mt-4">New Owner? Sign up here</a>
             </div>
-            <div class="sub-form container d-flex align-items-center justify-content-center">
+            <div class="sub-form d-flex align-items-center justify-content-center">
                 <div class="row bg-primary p-5 rounded-pill shadow-lg" >
                     <div class="col mx-auto align-items-center">
-                        <h1>Create A Owner</h1>
-                        <form action="/create/owner" method="post">
-                            <label class="form-label" for="first_name">First Name</label>
-                            <input class="form-control" type="text" name="first_name">
-                            <label class="form-label"  for="last_name">Last Name</label>
-                            <input class="form-control" type="text" name="last_name">
+                        <h1>Add an animal</h1>
+                        <form action="/create/animal" method="post">
+                            <label class="form-label" for="first_name"> Name</label>
+                            <input class="form-control" type="text" name="name">
+                            <label class="form-label"  for="age">Age</label>
+                            <input class="form-control" type="number" name="age">
+                            <label class="form-label"  for="type">Type</label>
+                            <input class="form-control" type="text" name="type">
+                            <select name="owner_id">
+                                {%for owner in owners%}
+                                <option value="{{owner.id}}" >{{owner.full_name()}}</option>
+                                {%endfor%}
+                            </select>
                             <input class="btn btn-success mt-3" type="submit" value="Submit">
                         </form>
                     </div>

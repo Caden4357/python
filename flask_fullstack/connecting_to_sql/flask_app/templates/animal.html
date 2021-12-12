@@ -14,39 +14,29 @@
     <div class="wrapper pt-5">
         <div class="container">
             <div class="d-flex justify-content-between ">
-                <a class="btn btn-secondary text-center" href="/animals" class="mt-4">Check out our animals</a>
+                <a class="btn btn-secondary text-center" href="/" class="mt-4">Home</a>
                 <h1>Welcome To Caden's Pet Clinic</h1>
-                <a class="btn btn-secondary text-center" href="/new/owner" class="mt-4">New Owner? Sign up here</a>
+                <a class="btn btn-secondary text-center" href="/new/animal" class="mt-4">New animal? sign them up here!</a>
             </div>
-            <!-- <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <h1>Welcome To Caden's Pet Clinic</h1>
-                    <a class="navbar-brand" href="/new/owner">New Owner</a>
-                </div>
-            </nav> -->
-            <h3 class="mt-5">Here's are list of current owners</h3>
+            <h3 class="mt-5">Here's a list of our current animals</h3>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Owner</th>
                     </tr>
                 </thead>
-                {%for owner in owners%}
+                {%for animal in all_animals%}
                 <tr>
-                    <td><a class="btn" href="/single/owner/{{owner.id}}">{{owner.first_name}}</a></td>
-                    <td>{{owner.last_name}}</td>
+                    <td><a class="btn" href="/single/animal/{{animal.id}}">{{animal.name}}</a></td>
+                    <td>{{animal.age}}</td>
+                    <td>{{animal.type}}</td>
+                    <td>{{animal.owner.full_name()}}</td>
                 </tr>
                 {%endfor%}
             </table>
-            <!-- <input id="selected" type="text" list="suggestions" placeholder="Search">
-
-            <datalist id="suggestions">
-                {%for owner in owners%}
-                <option hidden data-value="{{owner.id}}">{{owner.full_name()}}</option>
-                    {%endfor%}
-            </datalist> -->
-
         </div>
     </div>
 </body>

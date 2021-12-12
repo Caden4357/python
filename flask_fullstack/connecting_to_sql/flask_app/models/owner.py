@@ -46,8 +46,10 @@ class Owner:
 
     @classmethod
     def update_owner(cls, data):
-        return 
+        query = "UPDATE owners SET first_name = %(first_name)s, last_name= %(last_name)s WHERE id = %(id)s "
+        return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
     def delete_owner(cls, data):
-        return 
+        query = "DELETE FROM owners WHERE id = %(id)s"
+        return connectToMySQL(cls.db_name).query_db(query, data)
