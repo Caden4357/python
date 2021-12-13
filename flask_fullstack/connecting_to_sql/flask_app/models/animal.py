@@ -19,16 +19,17 @@ class Animal:
         animals = []
         for animal in results:
             this_animal = cls(animal)
+            print(this_animal.owner.full_name())
 
-            owner_info = {
-                'id': animal['owners.id'],
-                'first_name': animal['first_name'],
-                'last_name': animal['last_name'],
-                'created_at': animal['created_at'],
-                'updated_at': animal['updated_at'],
-            }
-            this_owner = owner.Owner(owner_info)
-            this_animal.owner = this_owner
+            # owner_info = {
+            #     'id': animal['owners.id'],
+            #     'first_name': animal['first_name'],
+            #     'last_name': animal['last_name'],
+            #     'created_at': animal['created_at'],
+            #     'updated_at': animal['updated_at'],
+            # }
+            # this_owner = owner.Owner(owner_info)
+            # this_animal.owner = this_owner
 
             animals.append(this_animal)
         return animals
@@ -50,3 +51,14 @@ class Animal:
     def update_animal(cls, data):
         query = "UPDATE animals SET name = %(name)s, age= %(age)s, type= %(type)s, owner_id=%(owner_id)s WHERE id = %(id)s "
         return connectToMySQL(cls.db_name).query_db(query, data)
+    
+    @classmethod
+    def find_animals_by_owner(cls, data):
+        query = "SELECT * FROM animals WHERE animals.owner_id = %(id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        # owners_animals = []
+        # for animal in results:
+        #     this_animal = cls(animal)
+        #     owners_animals.append(this_animal)
+
+        return results

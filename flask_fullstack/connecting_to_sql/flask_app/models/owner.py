@@ -35,6 +35,7 @@ class Owner:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(f"Results: {results}")
         this_owner = cls(results[0])
+        print(f"OWNER FROM BACK: {this_owner.full_name()}")
         return this_owner
 
     @classmethod

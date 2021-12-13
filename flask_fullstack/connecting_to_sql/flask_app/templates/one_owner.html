@@ -24,7 +24,13 @@
                             <label class="form-label" for="first_name">First Name</label>
                             <input class="form-control" value="{{this_owner.first_name}}" type="text" name="first_name">
                             <label class="form-label"  for="last_name">Last Name</label>
-                            <input class="form-control" type="text" name="last_name" value="{{this_owner.last_name}}">
+                            <input class="form-control" type="text" name="last_name" value="{{this_owner.last_name}}"> 
+                            <h1>Users Pets</h1>
+                            <ul>
+                                {%for animal in owners_animals%}
+                                <li>{{animal.name}}|{{animal.age}}|{{animal.type}}</li>
+                                {%endfor%}
+                            </ul>
                             <input class="btn btn-success mt-3" type="submit" value="Submit">
                         </form>
                     </div>

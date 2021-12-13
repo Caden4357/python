@@ -6,7 +6,6 @@ app.secret_key = "scdfsfds"
 @app.route('/animals')
 def animals():
     all_animals = animal.Animal.get_all_animals()
-    print(all_animals)
     return render_template('animal.html', all_animals=all_animals)
 
 @app.route('/new/animal')
