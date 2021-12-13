@@ -19,12 +19,13 @@ def get_one_owner(id):
     }
     print(data)
     this_owner = owner.Owner.get_one_owner_by_id(data)
-    this_owners_animals = animal.Animal.find_animals_by_owner(data)
-    print(f"OWNER!!: {this_owner}")
+    # this_owners_animals = animal.Animal.find_animals_by_owner(data)
+    this_owners_animals = owner.Owner.find_animals_by_owner(data)
+    print(f"OWNER!!: {this_owner.full_name()}")
     print(this_owners_animals)
     # this_ownerJSONdata = jsonpickle.encode(this_owner, indent=4)
     # session['this_owner'] = this_ownerJSONdata
-    return render_template('one_owner.html', this_owner=this_owner, owners_animals= this_owners_animals )
+    return render_template('one_owner.html', this_owner=this_owner, owners_animals=this_owners_animals)
 
 @app.route('/new/owner')
 def new_owner():

@@ -54,3 +54,9 @@ class Owner:
     def delete_owner(cls, data):
         query = "DELETE FROM owners WHERE id = %(id)s"
         return connectToMySQL(cls.db_name).query_db(query, data)
+    
+    @classmethod
+    def find_animals_by_owner(cls, data):
+        query = "SELECT * FROM owners LEFT JOIN animals ON owners.id = animals.owner_id WHERE owners.id = %(id)s;"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        return results

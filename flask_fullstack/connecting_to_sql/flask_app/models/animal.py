@@ -52,13 +52,13 @@ class Animal:
         query = "UPDATE animals SET name = %(name)s, age= %(age)s, type= %(type)s, owner_id=%(owner_id)s WHERE id = %(id)s "
         return connectToMySQL(cls.db_name).query_db(query, data)
     
-    @classmethod
-    def find_animals_by_owner(cls, data):
-        query = "SELECT * FROM animals WHERE animals.owner_id = %(id)s"
-        results = connectToMySQL(cls.db_name).query_db(query, data)
-        # owners_animals = []
-        # for animal in results:
-        #     this_animal = cls(animal)
-        #     owners_animals.append(this_animal)
+    # @classmethod
+    # def find_animals_by_owner(cls, data):
+    #     query = "SELECT * FROM animals WHERE animals.owner_id = %(id)s"
+    #     results = connectToMySQL(cls.db_name).query_db(query, data)
+    #     # owners_animals = []
+    #     # for animal in results:
+    #     #     this_animal = cls(animal)
+    #     #     owners_animals.append(this_animal)
 
-        return results
+    #     return results
