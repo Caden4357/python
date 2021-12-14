@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-
+from flask import flash
+import re 
 class Owner:
     # class attributes/methods vs instance attributes/methods
     # this is a class attribute its affecting the class 
@@ -10,6 +11,7 @@ class Owner:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.email = data['email']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -40,7 +42,7 @@ class Owner:
 
     @classmethod
     def create_owner(cls, data):
-        query = "INSERT INTO owners (first_name, last_name) VALUES (%(first_name)s, %(last_name)s)"
+        query = "INSERT INTO owners (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s)"
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(f"Results: {results}")
         return results
@@ -59,4 +61,24 @@ class Owner:
     def find_animals_by_owner(cls, data):
         query = "SELECT * FROM owners LEFT JOIN animals ON owners.id = animals.owner_id WHERE owners.id = %(id)s;"
         results = connectToMySQL(cls.db_name).query_db(query, data)
+        # owners_animals = []
+        # for row in results:
+        #     this_animal = cls(row)
+        #     owners_animals.append(this_animal)
+            # owners.append(cls(row))
         return results
+
+    @staticmethod
+    def validate_owner(data):
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+        is_valid = True
+        if len(data['first_name']) <= 1:
+            is_valid = False
+            flash('First name must be more than one character')
+        if len(data['last_name']) <= 1:
+            is_valid = False
+            flash('Last name must be more than one character')
+        elif not EMAIL_REGEX.match(data['email']):
+            is_valid = False
+            flash('Invalid email address')
+        return is_valid

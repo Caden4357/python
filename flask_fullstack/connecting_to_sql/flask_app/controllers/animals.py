@@ -1,7 +1,6 @@
 from flask_app import app
 from flask import render_template, redirect, request, session
 from ..models import animal, owner
-app.secret_key = "scdfsfds"
 
 @app.route('/animals')
 def animals():
@@ -17,6 +16,8 @@ def new_animal():
 @app.route('/create/animal', methods=['POST'])
 def create_animal():
     print(request.form)
+    if not animal.Animal.validate_animals(request.form):
+        return redirect('/new/animal')
     new_animal_id = animal.Animal.create_animal(request.form)
     print(new_animal)
 
@@ -35,7 +36,7 @@ def get_one_animal(id):
     return render_template('one_animal.html', this_animal=this_animal, owners=owners)
 
 @app.route('/update/animal/<int:id>', methods=['POST'])
-def get_one(id):
+def get_one_and_update(id):
     print(id)
     data = {
         'id': id,

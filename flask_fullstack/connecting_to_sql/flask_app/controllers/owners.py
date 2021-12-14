@@ -3,7 +3,7 @@ import json
 import jsonpickle
 from flask import render_template, redirect, request, session
 from ..models import owner,animal
-app.secret_key = "scdfsfds"
+
 
 @app.route('/')
 def index():
@@ -33,6 +33,8 @@ def new_owner():
 
 @app.route('/create/owner', methods=['POST'])
 def create_owner():
+    if not owner.Owner.validate_owner(request.form):
+        return redirect('/new/owner')
     owner_id = owner.Owner.create_owner(request.form)
     return redirect('/')
 

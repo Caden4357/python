@@ -25,8 +25,17 @@
                             <input class="form-control" type="text" name="first_name">
                             <label class="form-label"  for="last_name">Last Name</label>
                             <input class="form-control" type="text" name="last_name">
+                            <label class="form-label" for="email">Email:</label>
+                            <input class="form-control" type="text" name="email">
                             <input class="btn btn-success mt-3" type="submit" value="Submit">
                         </form>
+                        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+                        {% if messages %}                            <!-- check if there are any messages -->
+                            {% for message in messages %}            <!-- loop through the messages -->
+                                <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     </div>
                 </div>
             </div>

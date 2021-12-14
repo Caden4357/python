@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
 from ..models import owner
 
 class Animal:
@@ -52,6 +53,25 @@ class Animal:
         query = "UPDATE animals SET name = %(name)s, age= %(age)s, type= %(type)s, owner_id=%(owner_id)s WHERE id = %(id)s "
         return connectToMySQL(cls.db_name).query_db(query, data)
     
+
+    @staticmethod
+    def validate_animals(data):
+        is_valid = True
+        if len(data['name']) <= 1:
+            is_valid = False
+            flash('Name must be more than 1 character', "error")
+        if len(data['age']) == 0:
+            is_valid = False
+            flash('age must be more than 1 character', "error")
+        elif float(data['age']) < 0:
+            is_valid = False
+            flash('age must be a positive number', "error")
+        if len(data['type']) <= 1:
+            is_valid = False
+            flash('type must be more than 1 character', "error")
+        return is_valid
+
+
     # @classmethod
     # def find_animals_by_owner(cls, data):
     #     query = "SELECT * FROM animals WHERE animals.owner_id = %(id)s"
