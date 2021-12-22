@@ -31,9 +31,21 @@ def get_one_animal(id):
         "id": id
     }
     print(data)
+    one_animal = animal.Animal.get_one_animal(data)
+    print(one_animal)
+    return render_template('animal_profile.html', one_animal=one_animal, owners=owners)
+
+@app.route('/edit/animal/<int:id>')
+def edit_animal(id):
+    print(id)
+    owners = owner.Owner.get_all()
+    data = {
+        "id": id
+    }
+    print(data)
     this_animal = animal.Animal.get_one_animal(data)
     print(this_animal)
-    return render_template('one_animal.html', this_animal=this_animal, owners=owners)
+    return render_template('edit_animal.html', this_animal=this_animal, owners=owners)
 
 @app.route('/update/animal/<int:id>', methods=['POST'])
 def get_one_and_update(id):

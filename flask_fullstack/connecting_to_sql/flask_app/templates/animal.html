@@ -26,6 +26,7 @@
                         <th scope="col">Age</th>
                         <th scope="col">Type</th>
                         <th scope="col">Owner</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 {%for animal in all_animals%}
@@ -34,6 +35,7 @@
                     <td>{{animal.age}}</td>
                     <td>{{animal.type}}</td>
                     <td>{{animal.owner.full_name()}}</td>
+                    <td><a class="btn" href="/edit/animal/{{animal.id}}">edit</a></td>
                 </tr>
                 {%endfor%}
             </table>
