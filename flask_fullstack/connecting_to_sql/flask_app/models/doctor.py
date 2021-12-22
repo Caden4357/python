@@ -17,5 +17,18 @@ class Doctor:
     def create_doctor(cls, data):
         query = "INSERT INTO doctors (first_name, last_name) VALUES (%(first_name)s, %(last_name)s)"
         results = connectToMySQL(cls.db_name).query_db(query, data)
+        # print(results)
+        return results
+
+    @classmethod
+    def get_all(cls):
+        query="SELECT * FROM doctors"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        return results
+    
+    @classmethod
+    def add_doctor(cls, data):
+        query = "INSERT INTO doctors_has_animals (animals_id, doctors_id) VALUES (%(animal_id)s, %(doctor_id)s)"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
         print(results)
         return results

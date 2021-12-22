@@ -1,6 +1,6 @@
 from flask_app import app
 from flask import render_template, redirect, request, session
-from ..models import animal, owner
+from ..models import animal, doctor, owner
 
 @app.route('/animals')
 def animals():
@@ -33,7 +33,7 @@ def get_one_animal(id):
     print(data)
     one_animal = animal.Animal.get_one_animal(data)
     print(one_animal)
-    return render_template('animal_profile.html', one_animal=one_animal, owners=owners)
+    return render_template('animal_profile.html', one_animal=one_animal, owners=owners, doctors = doctor.Doctor.get_all())
 
 @app.route('/edit/animal/<int:id>')
 def edit_animal(id):
@@ -60,3 +60,12 @@ def get_one_and_update(id):
     print(data)
     animal.Animal.update_animal(data)
     return redirect('/animals')
+
+@app.route('/animals/<int:animal_id>/add_doctor', methods=["POST"])
+def add_doctor_to_animal(animal_id):
+    data = {
+        'animal_id': animal_id,
+        'doctor_id': request.form['doctor_id']
+    }
+    new_relationship = doctor.Doctor.add_doctor(data)
+    return redirect('/')
