@@ -4,11 +4,8 @@ import re
 
 
 class User:
-
     db_name = "users_with_flask"
-
     def __init__(self, data):
-
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
