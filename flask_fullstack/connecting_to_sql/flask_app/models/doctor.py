@@ -32,3 +32,5 @@ class Doctor:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(results)
         return results
+
+

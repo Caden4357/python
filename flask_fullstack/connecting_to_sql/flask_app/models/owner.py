@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from ..models import animal, doctor
 import re 
 class Owner:
     # class attributes/methods vs instance attributes/methods
@@ -12,6 +13,7 @@ class Owner:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
+        self.animals = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -31,13 +33,36 @@ class Owner:
             # owners.append(cls(row))
         return owners
 
+    # @classmethod
+    # def get_all(cls):
+    #     query = "SELECT * FROM owners;"
+    #     results = connectToMySQL(cls.db_name).query_db(query)
+    #     owners = []
+    #     for row in results:
+    #         this_owner = cls(row)
+    #         owners.append(this_owner)
+    #         # owners.append(cls(row))
+    #     return owners
+
     @classmethod
     def get_one_owner_by_id(cls, data):
-        query = "SELECT * FROM owners WHERE id = %(id)s"
+        query = "SELECT * FROM owners LEFT JOIN animals ON animals.owner_id = owners.id WHERE owners.id = %(id)s"
         results = connectToMySQL(cls.db_name).query_db(query, data)
         print(f"Results: {results}")
         this_owner = cls(results[0])
-        print(f"OWNER FROM BACK: {this_owner.full_name()}")
+        for row in results:
+            animal_info = {
+                'id': row['animals.id'],
+                'name': row['name'],
+                'age': row['age'],
+                'type': row['type'],
+                'created_at': row['animals.created_at'],
+                'updated_at': row['animals.updated_at'],
+            }
+            if row['animals.id'] is not None:
+                this_animal = animal.Animal(animal_info)
+                this_owner.animals.append(this_animal)
+        print(f"OWNER FROM BACK: {this_owner.animals}")
         return this_owner
 
     @classmethod

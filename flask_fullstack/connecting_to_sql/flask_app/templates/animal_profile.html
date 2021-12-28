@@ -21,6 +21,12 @@
             <h4>Age: {{one_animal.age}} Years old</h4>
             <h4>Type: {{one_animal.type}}</h4>
             <h4>Owner: {{one_animal.owner.full_name()}}</h4>
+            <h4>DR: {{one_animal.doctors.last_name}}</h4>
+            <ul>
+                {%for doctor in one_animal.doctors%}
+                <li>Dr {{doctor.last_name}}</li>
+                {%endfor%}
+            </ul>
             <form action="/animals/{{one_animal.id}}/add_doctor" method="post">
                 <label for="doctor_id">Doctor Name</label>
                 <select name="doctor_id">
